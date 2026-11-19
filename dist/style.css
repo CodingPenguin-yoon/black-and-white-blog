@@ -29,7 +29,7 @@ main {
 .signature {
   font-family: "Mr Dafoe", "AppleMyungjo", "Batang", Georgia, serif;
   font-weight: 400;
-  font-size: clamp(3.5rem, 11vw, 8.5rem);
+  font-size: clamp(2.5rem, 12vw, 8.5rem);
   line-height: 1.18;
 }
 
