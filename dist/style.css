@@ -1,59 +1,90 @@
+@font-face {
+  font-family: "Mr Dafoe";
+  src: url("./fonts/mr-dafoe-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   background: #000;
   color: #fff;
   font-family: system-ui, sans-serif;
-  line-height: 1.6;
+  --terminal: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
 
-body {
+body, h1, .entries ul {
   margin: 0;
 }
 
 main {
-  max-width: 52rem;
+  max-width: 54rem;
   margin-inline: auto;
-  padding: clamp(3rem, 12vh, 8rem) clamp(1.5rem, 6vw, 4rem);
+  padding: clamp(3.5rem, 14vh, 9rem) clamp(1.5rem, 7vw, 5rem);
 }
 
-h1 {
-  margin: 0;
-  font-size: clamp(3.5rem, 8vw, 6rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.055em;
+.signature {
+  font-family: "Mr Dafoe", "AppleMyungjo", "Batang", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 11vw, 8.5rem);
+  line-height: 1.18;
 }
 
-h1 + nav, article {
-  margin-block-start: clamp(2.5rem, 7vh, 4rem);
+.entries, article {
+  margin-block-start: clamp(2.5rem, 7vh, 4.5rem);
+}
+
+.entries ul {
+  padding: 0;
+  list-style: none;
+}
+
+.entries a, .home-link {
+  display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding-block: 0.65rem;
+  font: 1rem/1.6 var(--terminal);
+  text-decoration: none;
+}
+
+article .signature {
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.prose {
+  max-width: 38rem;
+  margin-block-start: 2rem;
+  font-size: 1.125rem;
+  line-height: 1.85;
+}
+
+.prose :first-child {
+  margin-block-start: 0;
+}
+
+.prose pre {
+  overflow-x: auto;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
 }
 
 a {
-  display: inline-block;
-  padding-block: 0.5rem;
   color: inherit;
-  font-size: 1.125rem;
-  text-decoration: none;
+  text-underline-offset: 0.25em;
 }
 
 a:hover, a:focus-visible {
   text-decoration: underline;
-  text-underline-offset: 0.3em;
 }
 
 a:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 4px;
-}
-
-article h1 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-}
-
-p {
-  margin: 2rem 0 0;
-  font-size: 1.125rem;
-  line-height: 1.8;
 }
