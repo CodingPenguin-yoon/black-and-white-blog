@@ -29,7 +29,7 @@ def read_post(path):
     return Post(date.fromisoformat(name[1]), name[2], escape(heading[2:].strip()), MARKDOWN.render(body))
 
 
-def page(title, content, prefix):
+def page(title, content, prefix, heading_font):
     return f"""<!doctype html>
 <html lang="ko">
 <head>
@@ -37,7 +37,7 @@ def page(title, content, prefix):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
   <title>{title}</title>
-  <link rel="preload" href="{prefix}fonts/mr-dafoe-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{prefix}fonts/{heading_font}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{prefix}style.css">
 </head>
 <body>
@@ -69,21 +69,22 @@ def build():
         {links}
       </ul>
     </nav>"""
-    (DIST / "index.html").write_text(page(BRAND, home, "./"), encoding="utf-8")
+    (DIST / "index.html").write_text(page(BRAND, home, "./", "mr-dafoe-latin.woff2"), encoding="utf-8")
 
     for post in posts:
         article = f"""<nav aria-label="블로그">
       <a class="home-link" href="../../" aria-label="cd .. · 글 목록으로 돌아가기"><span aria-hidden="true">$</span> cd ..</a>
     </nav>
     <article>
-      <h1 class="signature">{post.title}</h1>
+      <h1>{post.title}</h1>
       <div class="prose">
         {post.body.strip()}
       </div>
     </article>"""
         output = DIST / "posts" / post.slug / "index.html"
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(page(f"{post.title} · {BRAND}", article, "../../"), encoding="utf-8")
+        html = page(f"{post.title} · {BRAND}", article, "../../", "chakra-petch-semibold-latin.woff2")
+        output.write_text(html, encoding="utf-8")
 
     for old in (DIST / "posts").glob("*/index.html"):
         if old.parent.name not in slugs:
