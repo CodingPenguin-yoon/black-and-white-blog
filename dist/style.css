@@ -1,0 +1,59 @@
+:root {
+  color-scheme: dark;
+  background: #000;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 52rem;
+  margin-inline: auto;
+  padding: clamp(3rem, 12vh, 8rem) clamp(1.5rem, 6vw, 4rem);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.055em;
+}
+
+h1 + nav, article {
+  margin-block-start: clamp(2.5rem, 7vh, 4rem);
+}
+
+a {
+  display: inline-block;
+  padding-block: 0.5rem;
+  color: inherit;
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+
+a:hover, a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+article h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+}
+
+p {
+  margin: 2rem 0 0;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
