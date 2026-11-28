@@ -3,12 +3,14 @@ from datetime import date
 from html import escape
 from pathlib import Path
 import re
+import shutil
 
 from markdown_it import MarkdownIt
 
 
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / "dist"
+STATIC = ROOT / "static"
 BRAND = "Black &amp; White"
 MARKDOWN = MarkdownIt("commonmark", {"html": False})
 
@@ -59,6 +61,10 @@ def build():
     if len(slugs) != len(posts):
         raise ValueError("각 글의 슬러그는 고유해야 합니다.")
 
+    # dist/는 매번 새로 만든다: 정적 파일을 복사한 뒤 HTML을 생성한다.
+    shutil.rmtree(DIST, ignore_errors=True)
+    shutil.copytree(STATIC, DIST)
+
     links = "\n        ".join(
         f'<li><a href="./posts/{post.slug}/"><span aria-hidden="true">$</span> {post.title}</a></li>'
         for post in posts
@@ -85,10 +91,6 @@ def build():
         output.parent.mkdir(parents=True, exist_ok=True)
         html = page(f"{post.title} · {BRAND}", article, "../../", "chakra-petch-semibold-latin.woff2")
         output.write_text(html, encoding="utf-8")
-
-    for old in (DIST / "posts").glob("*/index.html"):
-        if old.parent.name not in slugs:
-            old.unlink()
 
 
 if __name__ == "__main__":
